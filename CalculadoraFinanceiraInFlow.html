@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+
+<body>
+    <div id="div_exibir">
+        <h1>Calculadora Financeira</h1>
+        <div id="div_central">
+            <div>
+                <p>Quantas pessoas passam em média no seu supermercado diariamente?</p>
+                <input type="number" id="iptQtdTotal">
+            </div>
+            <div>
+                <h2>Insira uma estimativa dos dados sobre os corredores que você considera ser de BAIXO, MÉDIO e ALTO fluxo.</h2>
+            </div>
+            <div>
+                <p>Quantas pessoas passam em média por um corredor de <b>ALTO</b> fluxo diariamente?</p>
+                <input type="number" id="iptQtdPessoasAlto">
+            </div>
+            <div>
+                <p>Quantos produtos são vendidos em média nesse corredor diariamente?</p>
+                <input type="number" id="iptQtdProdutosVendidosAlto">
+            </div>
+            <div>
+                <p>Qual o valor médio dos produtos neste corredor?</p>
+                <input type="number" id="iptPrecoMedioFluxoAlto">
+            </div>
+            <div>
+                <p></p>
+            </div>
+            <button id="" onclick="adicionarCorredorAlto()">Corredor Médio Fluxo</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var qtdPessoasAlto;
+    var qtdProdutosVendidosAlto;
+    var precoMedioFluxoAlto;
+
+    var qtdPessoasMedio;
+    var qtdProdutosVendidosMedio;
+    var precoMedioFluxoMedio;
+
+    var qtdPessoasBaixo;
+    var qtdProdutosVendidosBaixo;
+    var precoMedioFluxoBaixo;
+
+    var qtdTotal;
+
+    function adicionarCorredorAlto() {
+        qtdTotal = Number(iptQtdTotal.value);
+        qtdPessoasAlto = Number(iptQtdPessoasAlto.value);
+        qtdProdutosVendidosAlto = Number(iptQtdProdutosVendidosAlto.value);
+        precoMedioFluxoAlto = Number(iptPrecoMedioFluxoAlto.value);
+
+        div_exibir.innerHTML = `
+            <h1>Insira os dados estimados do corredor de MÉDIO fluxo: </h1>
+            <div>
+                <p>Quantas pessoas passam em média por um corredor de <b>MÉDIO</b> fluxo diariamente?</p>
+                <input type="number" id="iptQtdPessoasMedio">
+                <div>
+                <p>Quantos produtos são vendidos em média nesse corredor diariamente?</p>
+                <input type="number" id="iptQtdProdutosVendidosMedio">
+            </div>
+            <div>
+                <p>Qual o valor médio dos produtos neste corredor?</p>
+                <input type="number" id="iptPrecoMedioFluxoMedio">
+            </div>
+            </div>
+            <div>
+                <p></p>
+            </div>
+            <button id="" onclick="adicionarCorredorMedio()">Corredor Baixo Fluxo</button>
+        `;
+    }
+
+    function adicionarCorredorMedio() {
+        qtdPessoasMedio = Number(iptQtdPessoasMedio.value);
+        qtdProdutosVendidosMedio = Number(iptQtdProdutosVendidosMedio.value);
+        precoMedioFluxoMedio = Number(iptPrecoMedioFluxoMedio.value);
+
+        div_exibir.innerHTML = `
+            <h1>Insira os dados estimados do corredor de BAIXO fluxo: </h1>
+            <div>
+                <p>Quantas pessoas passam em média por um corredor de <b>BAIXO</b> fluxo diariamente?</p>
+                <input type="number" id="iptQtdPessoasBaixo">
+                <div>
+                <p>Quantos produtos são vendidos em média nesse corredor diariamente?</p>
+                <input type="number" id="iptQtdProdutosVendidosBaixo">
+            </div>
+            <div>
+                <p>Qual o valor médio dos produtos neste corredor?</p>
+                <input type="number" id="iptPrecoMedioFluxoBaixo">
+            </div>
+            </div>
+            <div>
+                <p></p>
+            </div>
+            <button id="" onclick="calculoFinal()">O quanto posso lucrar?</button>
+        `;
+    }
+
+    function calculoFinal() {
+        qtdPessoasBaixo = Number(iptQtdPessoasBaixo.value);
+        qtdProdutosVendidosBaixo = Number(iptQtdProdutosVendidosBaixo.value);
+        precoMedioFluxoBaixo = Number(iptPrecoMedioFluxoBaixo.value);
+
+        // faturamento dos corredores de alto, médio e baixo fluxo
+        var faturamentoCorredorBaixo = qtdProdutosVendidosBaixo * precoMedioFluxoBaixo;
+        var faturamentoCorredorMedio = qtdProdutosVendidosMedio * precoMedioFluxoMedio;
+        var faturamentoCorredorAlto = qtdProdutosVendidosAlto * precoMedioFluxoAlto;
+
+        // calcula a taxa de alocação dos corredores de médio e alto fluxo
+        var taxaAlocacaoMedio = (qtdPessoasMedio / qtdTotal) * faturamentoCorredorMedio * 0.2;
+        var taxaAlocacaoAlto = (qtdPessoasAlto / qtdTotal) * faturamentoCorredorAlto * 0.2;
+
+        div_exibir.innerHTML = `
+            <h1>Como seu faturamento será aumentado?</h1>
+            <div>
+                <p>Em seu corredor de <b>BAIXO</b>, fluxo com <b>${qtdPessoasBaixo}</b> clientes diários estimados, seu faturamento diário foi de <b>R$${faturamentoCorredorBaixo.toFixed(2)}</b>. Não é recomendado aplicar taxa de alocação, devido à sua baixa rotatividade.</p>
+
+                <p>Em seu corredor de <b>MÉDIO</b> fluxo, com <b>${qtdPessoasMedio}</b> clientes diários estimados, seu faturamento diário foi de <b>R$${faturamentoCorredorMedio.toFixed(2)}</b>. A taxa de alocação diária, calculada com base em seu fluxo, totaliza <b>R$${taxaAlocacaoMedio.toFixed(2)}</b>.</p>
+
+                <p>Em seu corredor de <b>ALTO</b> fluxo, com <b>${qtdPessoasAlto}</b> clientes diários estimados, seu faturamento foi diário foi de <b>R$${faturamentoCorredorAlto.toFixed(2)}</b>. A taxa de alocação diária, calculada com base em seu fluxo, totaliza <b>R$${taxaAlocacaoAlto.toFixed(2)}</b>.</p>
+            </div>
+            <div>
+                <p></p>
+            </div>
+        `;
+    } 
+</script>
