@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    <p>Insira o fluxo de pessoas no corredor:</p>
+    <input id="ipt_fluxo" type="number">
+    <br>
+    <p>Informe o valor definido por 1000 pessoas (R$):</p>
+    <input id="ipt_valor" type="number">
+    <br>
+    <button onclick="calcularValorEspaco()">Calcular Valor do Espaço</button>
+    <div id="div_resultado"></div>
+</body>
+</html>
+
+<script>
+    function calcularValorEspaco() {
+        var fluxo = Number(ipt_fluxo.value);
+        var valorBase = Number(ipt_valor.value);
+
+        var valorEspaco = (fluxo / 1000) * valorBase;
+        
+        div_resultado.innerHTML = `
+            Com um fluxo de ${fluxo} pessoas, e um valor de R$ ${valorBase.toFixed(2)} por 1000 pessoas,<br>
+            o preço sugerido para esse espaço é R$ ${valorEspaco.toFixed(2)}.`;
+    }
+</script>
