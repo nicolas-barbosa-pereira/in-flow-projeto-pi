@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<div id="div_exibir">
+
+    <body>
+        <h1>O quanto você pode lucrar com nossa solução?</h1>
+        <div id="div_central">
+            <div>
+                <p>Insira quantos fornecedores você possui: </p>
+                <input type="number" id="iptQtdFornecedores">
+            </div>
+            <div>
+                <p>Insira quantos fornecedores grandes você possui: </p>
+                <input type="number" id="iptQtdFornecedoresGrandes">
+            </div>
+            <div>
+                <p>O quanto você fatura em média com um grande fornecedor?</p>
+                <input type="number" id="iptFaturamentoProduto">
+            </div>
+            <div>
+                <p></p>
+            </div>
+            <button id="button_lucro" onclick="calcularLucro()">O quanto posso lucrar?</button>
+        </div>
+        <div id="div_texto"></div>
+</div>
+</body>
+
+</html>
+<script>
+    function calcularLucro() {
+        var qtdFornecedores = Number(iptQtdFornecedores.value);
+        var qtdFornecedoresGrandes = Number(iptQtdFornecedoresGrandes.value);
+        var faturamentoProdutoGrande = Number(iptFaturamentoProduto.value);
+        var qtdCorredores = Number(iptQtdCorredores.value);
+
+        var reducaoPrejuizo = 0.12; // Assumindo que o restaurante pode recuperar 10% do prejuízo atual
+        var taxaAlocacaoGrande = 5000; // Fornecedor grande paga R$5000/mês por posição privilegiada no corredor
+        var taxaAlocacaoPequeno = 2000; //fornecedor pequeno paga R$2000/mês 
+
+        var qtdForncedoresPequenos = qtdFornecedores - qtdFornecedoresGrandes;
+
+        var qtdCorredoresPrivilegiadosGrandes = qtdCorredores * 0.1;
+        var qtdCorredoresPrivilegiadosPequenos = qtdCorredores * 0.2;
+
+        var marcasPorCorredor = 8;
+
+        var faturamentoProdutoPequeno = (faturamentoProdutoGrande * 0.55); // Considerando que o faturamento de um produto pequeno é a metade do grande
+        var faturamentoPequenoTotal = faturamentoProdutoPequeno * qtdForncedoresPequenos;
+        var faturamentoGrandeTotal = faturamentoProdutoGrande * qtdFornecedoresGrandes;
+
+        // resultado total após a recuperação do prejuizo
+        var faturamentoRecuperado = (faturamentoPequenoTotal + faturamentoGrandeTotal) * reducaoPrejuizo;
+        var receitaAlocacao = ((qtdCorredoresPrivilegiadosGrandes * marcasPorCorredor) * taxaAlocacaoGrande) + ((qtdCorredoresPrivilegiadosPequenos * marcasPorCorredor) * taxaAlocacaoPequeno);
+
+        var lucroTotal = faturamentoRecuperado + receitaAlocacao;
+
+        alert(lucroTotal);
+    }
+</script>
