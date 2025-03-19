@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Espaços</title>
+</head>
+<body>
+    <h1>Calculadora Financeira</h1>
+    <p>Insira a quantidade mensal de pessoas: </p>
+    <input id="ipt_clientesMensais" type="number">
+    <p>Clientes por mês:</p>
+    <input id="ipt_ClientesMensais" type="number">
+    <p>Quantidade de corredores no supermercado:</p>
+    <input type="number" id="ipt_qtdCorredores">
+    <button onclick="calcularValorEspaco()">Calcular Valor do Espaço</button>
+
+    <div id="div_resultado"></div>
+</body>
+</html>
+
+<script>
+    function calcularValorEspaco() {
+        var clientesMensais = Number(ipt_clientesMensais.value); 
+        var qtdCorredores = Number(ipt_qtdCorredores.value);
+        var qtdClientes = Number(ipt_ClientesMensais.value);
+
+        var mediaCorredor = qtdClientes / qtdCorredores; 
+
+        var fatorDemanda = 1;
+        var categoriaCorredor = '';
+
+        
+        if (mediaCorredor > 1500) {
+            categoriaCorredor = 'Corredor Premium';
+            fatorDemanda = 2.0;
+        } else if (mediaCorredor >= 1000) {
+            categoriaCorredor = 'Corredor de Alta Demanda';
+            fatorDemanda = 1.5;
+        } else if (mediaCorredor >= 500) {
+            categoriaCorredor = 'Corredor de Demanda Normal';
+            fatorDemanda = 1.2;
+        } else {
+            categoriaCorredor = 'Corredor de Baixa Demanda';
+            fatorDemanda = 0.8;
+        }
+
+        var valorBasePorMil = 100; 
+        var fluxo = clientesMensais; 
+
+        var valorEspaco = (fluxo / 1000) * valorBasePorMil * fatorDemanda;
+
+        div_resultado.innerHTML = ` 
+            Categoria do corredor: <strong>${categoriaCorredor}</strong><br>
+            Com um fluxo de ${fluxo} pessoas e um valor base de R$ ${valorBasePorMil.toFixed(2)} por 1000 pessoas,<br>
+            considerando um fator de demanda de ${fatorDemanda},<br>
+            o preço sugerido para esse espaço é <strong>R$ ${valorEspaco.toFixed(2)}</strong>.`;
+    }
+</script>
