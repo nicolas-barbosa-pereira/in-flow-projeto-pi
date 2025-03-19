@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<div id="div_exibir">
+<body>
+    <h1>O quanto você pode lucrar com nossa solução?</h1>
+    <div id="div_central">
+        <div>
+            <p>Insira quantos fornecedores você possui: </p>
+            <input type="number" id="iptQtdFornecedores">
+        </div>
+        <div>
+            <p>Insira quantos fornecedores grandes você possui: </p>
+            <input type="number" id="iptQtdFornecedoresGrandes">
+        </div>
+        <div>
+            <p>O quanto você fatura em média com um grande fornecedor?</p>
+            <input type="number" id="iptFaturamentoProduto">
+        </div>
+        <div>
+            <p>Insira quantos corredores seu supermercado possui:</p>
+            <input type="number" id="iptQtdCorredores">
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <button id="button_lucro" onclick="calcularLucro()">O quanto posso lucrar?</button>
+    </div>
+    <div id="div_texto"></div>
+</div>
+</body>
+
+</html>
+<script>
+    function calcularLucro() {
+        var qtdFornecedores = Number(iptQtdFornecedores.value);
+        var qtdFornecedoresGrandes = Number(iptQtdFornecedoresGrandes.value);
+        var faturamentoProdutoGrande = Number(iptFaturamentoProduto.value);
+        var qtdCorredores = Number(iptQtdCorredores.value);
+
+        var qtdForncedoresPequenos = qtdFornecedores - qtdFornecedoresGrandes;
+
+        var faturamentoProdutoPequeno = (faturamentoProdutoGrande * 0.5); // Considerando que o faturamento de um produto pequeno é a metade do grande
+        var faturamentoPequenoTotal = faturamentoProdutoPequeno * qtdForncedoresPequenos;
+
+        var faturamentoGrandeTotal = faturamentoProdutoGrande * qtdFornecedoresGrandes;
+
+        div_texto.innerHTML = `Com a aquisiçao do nosso serviço, através de uma visão estratégica e eficiente do fluxo de pessoas em seu negócio, com um único produto de um grande fornecedor, seu faturamento aumentará em até R$${faturamentoProdutoGrande * 0.2} <br>
+        , e consequentemente uma melhor disposição dos seus produtos, seu lucro total será entre R$${((faturamentoPequenoTotal * 1.1) + (faturamentoGrandeTotal * 1.1)).toFixed(0)} e R$${((faturamentoPequenoTotal * 1.2) + (faturamentoGrandeTotal * 1.2)).toFixed(0)}`;
+    
+    /* 
+    var reducaoPrejuizo = 0.1; // Assumindo que o empresário pode recuperar 10% do prejuízo atual
+    var taxaAlocacaoGrande = 5000; // Exemplo: fornecedor grande paga R$5000/mês por posição privilegiada
+    var taxaAlocacaoPequeno = 2000; // Exemplo: fornecedor pequeno paga R$2000/mês 
+
+    var faturamentoRecuperado = faturamentoGrandeTotal * reducaoPrejuizo;
+    var receitaAlocacao = (qtdFornecedoresGrandes * taxaAlocacaoGrande) + (qtdForncedoresPequenos * taxaAlocacaoPequeno);
+
+    var lucroTotal = faturamentoRecuperado + receitaAlocacao;
+
+    */
+    }
+</script>
