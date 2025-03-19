@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    <h1>Calculadora Financeira</h1>
+    <p>Quantas pessoas passam no seu corredor diariamente?</p>
+    <input type="number" id="ipt_qtdPessoas">
+    <p>Qual o preço médio dos produtos nesse corredor</p>
+    <input type="number" id="ipt_preco">
+    <br><br>
+    <button onclick="calcular()">Calcular taxa de alocação</button>
+    <div id="div_calculadora"></div>
+</body>
+</html>
+<script>
+
+    function calcular() {
+
+        var qtdPessoas = Number(ipt_qtdPessoas.value)
+        var preco = Number(ipt_preco.value)
+        var lucro = qtdPessoas * preco
+        var taxa = lucro * 0.2
+
+        div_calculadora.innerHTML = `Em seu corredor com a quantidade média de pessoas sendo ${qtdPessoas} e preço médio dos produtos sendo R$${preco} o seu lucro será de RS${lucro} e podendo cobrar cerca de  R$${taxa}`
+
+    }
+
+</script>
